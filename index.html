@@ -1056,7 +1056,7 @@ footer{
     else{extra.placeholder='Company name & CSR budget range';country.placeholder='Company country';}
   }
 
-  // Formspree submission
+  // Waitlist submission (routes to info@ailesglobal.com)
   async function handleJoin(){
     const name=document.getElementById('cName').value.trim();
     const email=document.getElementById('cEmail').value.trim();
@@ -1072,11 +1072,24 @@ footer{
     btn.textContent='Submitting...';btn.disabled=true;
 
     try{
-      const res=await fetch('https://formspree.io/f/scholars@ailesglobal.com',{
+      const res=await fetch('https://formsubmit.co/ajax/info@ailesglobal.com',{
         method:'POST',
         headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body:JSON.stringify({name,email,country,extra,type:activeTab})
+        body:JSON.stringify({
+          name,
+          email,
+          country,
+          details:extra,
+          type:activeTab,
+          _subject:`Ailes Scholars Waitlist: ${activeTab}`,
+          _template:'table',
+          _captcha:'false'
+        })
       });
+
+      if(!res.ok){
+        throw new Error('Submission failed');
+      }
 
       document.getElementById('ctaForm').innerHTML=`
         <div style="padding:2.5rem;border:1px solid rgba(248,245,239,0.12);border-radius:4px;text-align:center;">
@@ -1086,7 +1099,10 @@ footer{
         </div>`;
     }catch(err){
       btn.textContent='Join the Waitlist →';btn.disabled=false;
-      alert('Something went wrong. Please email us directly at info@ailesglobal.com');
+      const subject=encodeURIComponent(`Ailes Scholars Waitlist: ${activeTab}`);
+      const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCountry: ${country}\nType: ${activeTab}\nDetails: ${extra}`);
+      window.location.href=`mailto:info@ailesglobal.com?subject=${subject}&body=${body}`;
+      alert('We could not submit automatically. Your email app has been opened to send this to info@ailesglobal.com.');
     }
   }
 </script>
