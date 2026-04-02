@@ -577,10 +577,60 @@ footer{
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.75s ease,transform 0.75s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
+/* HAMBURGER */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:4px;
+}
+.hamburger span{
+  display:block;width:22px;height:1.5px;
+  background:var(--ink);border-radius:2px;
+  transition:transform 0.3s,opacity 0.3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+.mobile-menu{
+  display:none;
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:var(--ivory);z-index:400;
+  padding:6rem 2rem 3rem;
+  flex-direction:column;gap:0;
+  overflow-y:auto;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-family:'Libre Baskerville',serif;
+  font-size:1.8rem;font-weight:700;color:var(--ink);
+  text-decoration:none;padding:1.1rem 0;
+  border-bottom:1px solid rgba(12,12,10,0.07);
+  display:block;transition:color 0.2s;
+}
+.mobile-menu a:hover{color:var(--gold);}
+.mobile-menu-actions{
+  display:flex;flex-direction:column;gap:0.75rem;
+  margin-top:2rem;
+}
+.mobile-menu-contact{
+  margin-top:auto;padding-top:2rem;
+  font-size:0.78rem;color:var(--ink-faint);
+  display:flex;flex-direction:column;gap:0.4rem;
+}
+.mobile-menu-contact a{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.82rem;font-weight:400;
+  color:var(--ink-dim);border:none;padding:0;
+  text-decoration:none;
+}
+.mobile-menu-contact a:hover{color:var(--teal);}
+
 /* Responsive */
 @media(max-width:960px){
   nav{padding:1.2rem 1.5rem;}
   .nav-mid{display:none;}
+  .nav-right{display:none;}
+  .hamburger{display:flex;}
   .hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem;gap:3rem;}
   .how-grid{grid-template-columns:1fr 1fr;}
   .scholars-grid{grid-template-columns:1fr;}
@@ -589,6 +639,19 @@ footer{
   .impact-grid{grid-template-columns:1fr 1fr;}
   .how-section,.scholars-section,.sides-section,.revenue-section,.impact-section,.cta-section{padding:5rem 1.5rem;}
   footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+  .scholars-header{flex-direction:column;align-items:flex-start;gap:1.5rem;}
+  .hero-right{display:none;}
+  .card-floating{left:0;bottom:-0.5rem;}
+  .side-card{padding:2rem 1.5rem;}
+}
+
+@media(max-width:480px){
+  .how-grid{grid-template-columns:1fr;}
+  .impact-grid{grid-template-columns:1fr 1fr;}
+  .cta-tabs{width:100%;}
+  .cta-tab{flex:1;padding:0.65rem 0.8rem;font-size:0.72rem;}
+  .hero-h1{font-size:clamp(2.5rem,10vw,3.5rem);}
+  .section-h2{font-size:clamp(1.6rem,6vw,2.2rem);}
 }
 </style>
 </head>
@@ -610,7 +673,27 @@ footer{
     <a href="#apply" class="btn-ghost">Apply as Scholar</a>
     <a href="#donate" class="btn-dark">Fund a Scholar</a>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#how" onclick="closeMenu()">How it works</a>
+  <a href="#scholars" onclick="closeMenu()">Browse Scholars</a>
+  <a href="#donors" onclick="closeMenu()">For Donors</a>
+  <a href="#revenue" onclick="closeMenu()">The Model</a>
+  <div class="mobile-menu-actions">
+    <a href="#apply" class="btn-primary" onclick="closeMenu()" style="text-align:center;">Apply as a Scholar →</a>
+    <a href="#donate" class="btn-outline" onclick="closeMenu()" style="text-align:center;">Fund a Scholar</a>
+  </div>
+  <div class="mobile-menu-contact">
+    <span>Get in touch</span>
+    <a href="tel:+256704833021">Call: +256 704 833 021</a>
+    <a href="mailto:info@ailesglobal.com">Email: info@ailesglobal.com</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -639,12 +722,12 @@ footer{
 
     <div class="hero-proof">
       <div class="proof-flags">
-        <div class="proof-flag">🇺🇬</div>
-        <div class="proof-flag">🇰🇪</div>
-        <div class="proof-flag">🇳🇬</div>
-        <div class="proof-flag">🇬🇭</div>
-        <div class="proof-flag">🇿🇦</div>
-        <div class="proof-flag">🇪🇹</div>
+        <div class="proof-flag">UG</div>
+        <div class="proof-flag">KE</div>
+        <div class="proof-flag">NG</div>
+        <div class="proof-flag">GH</div>
+        <div class="proof-flag">ZA</div>
+        <div class="proof-flag">ET</div>
       </div>
       <div class="proof-text">
         <strong>54 African nations</strong> represented.<br/>
@@ -657,7 +740,7 @@ footer{
     <div class="scholar-stack">
       <div class="scholar-card">
         <div class="scholar-card-header">
-          <div class="scholar-avatar">👩🏾</div>
+          <div class="scholar-avatar">AN</div>
           <div>
             <div class="scholar-name">Amara Nakato</div>
             <div class="scholar-meta">Uganda · BSc Computer Science</div>
@@ -686,13 +769,13 @@ footer{
         </div>
 
         <div class="scholar-actions">
-          <button class="btn-fund">Fund Amara →</button>
-          <button class="btn-profile">View Profile</button>
+          <a href="#apply" class="btn-fund" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">Join Waitlist →</a>
+          <a href="#how" class="btn-profile" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">Learn More</a>
         </div>
       </div>
 
       <div class="card-floating">
-        <div class="float-icon">🎉</div>
+        <div class="float-icon">NEW</div>
         <div>James from London just donated <strong>$500</strong></div>
       </div>
     </div>
@@ -733,25 +816,25 @@ footer{
   <div class="how-grid">
     <div class="how-card reveal">
       <div class="how-num">01</div>
-      <div class="how-icon">📋</div>
+      <div class="how-icon">APPLY</div>
       <div class="how-title">Scholars apply</div>
       <div class="how-desc">Top African students submit their profile — academic record, program, university acceptance, and funding need. Every application is reviewed by our team.</div>
     </div>
     <div class="how-card reveal">
       <div class="how-num">02</div>
-      <div class="how-icon">✅</div>
+      <div class="how-icon">VERIFY</div>
       <div class="how-title">We verify & list</div>
       <div class="how-desc">Only the best get listed. We verify admission letters, academic credentials, and funding gaps. Every scholar on the platform is genuine and exceptional.</div>
     </div>
     <div class="how-card reveal">
       <div class="how-num">03</div>
-      <div class="how-icon">💳</div>
+      <div class="how-icon">FUND</div>
       <div class="how-title">Donors fund directly</div>
       <div class="how-desc">Individuals, corporates, and foundations browse scholar profiles and fund anyone they connect with. Full transparency on where every dollar goes.</div>
     </div>
     <div class="how-card reveal">
       <div class="how-num">04</div>
-      <div class="how-icon">🎓</div>
+      <div class="how-icon">STUDY</div>
       <div class="how-title">Scholars fly & study</div>
       <div class="how-desc">Once funded, Ailes Travel handles visa and relocation. Donors receive progress updates. The scholar begins their journey — and changes Africa from the outside.</div>
     </div>
@@ -769,62 +852,31 @@ footer{
   </div>
 
   <div class="scholars-grid">
-    <div class="s-card reveal">
-      <div class="s-top">
-        <div class="s-avatar" style="background:linear-gradient(135deg,#0F7A5A,#12A678);">👨🏿</div>
-        <div class="s-info">
-          <div class="s-name">Kwame Asante</div>
-          <div class="s-country">🇬🇭 Ghana</div>
-        </div>
-        <div class="s-badge stem">STEM</div>
-      </div>
-      <div class="s-program">MSc Renewable Energy Engineering</div>
-      <div class="s-uni">Imperial College London, UK</div>
-      <div class="s-bar"><div class="s-fill" style="width:82%;"></div></div>
-      <div class="s-bottom">
-        <div class="s-raised">Raised <strong>$24,600</strong> of</div>
-        <div class="s-target">$30,000</div>
-      </div>
-      <button class="s-fund-btn">Fund Kwame →</button>
+
+    <!-- Pre-launch card 1 -->
+    <div class="s-card reveal" style="border:2px dashed rgba(15,122,90,0.25);background:linear-gradient(135deg,rgba(15,122,90,0.03),rgba(248,245,239,0.5));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:280px;gap:1rem;">
+      <div style="font-size:1.1rem;font-weight:600;letter-spacing:0.08em;">SCHOLAR</div>
+      <div style="font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--ink);">Be our first listed scholar</div>
+      <div style="font-size:0.8rem;color:var(--ink-dim);line-height:1.6;max-width:220px;">Are you an African student with university acceptance? Apply now — free to list, no hidden fees.</div>
+      <a href="#apply" class="s-fund-btn" style="background:var(--teal);color:var(--white);text-decoration:none;display:inline-block;padding:0.7rem 1.4rem;border-radius:2px;font-size:0.78rem;font-weight:500;letter-spacing:0.04em;width:auto;margin-top:0.5rem;">Apply as a Scholar →</a>
     </div>
 
-    <div class="s-card reveal">
-      <div class="s-top">
-        <div class="s-avatar" style="background:linear-gradient(135deg,#B5870C,#D4A520);">👩🏽</div>
-        <div class="s-info">
-          <div class="s-name">Fatima Al-Hassan</div>
-          <div class="s-country">🇳🇬 Nigeria</div>
-        </div>
-        <div class="s-badge law">Law</div>
-      </div>
-      <div class="s-program">LLM International Human Rights Law</div>
-      <div class="s-uni">University of Oxford, UK</div>
-      <div class="s-bar"><div class="s-fill" style="width:45%;"></div></div>
-      <div class="s-bottom">
-        <div class="s-raised">Raised <strong>$10,800</strong> of</div>
-        <div class="s-target">$24,000</div>
-      </div>
-      <button class="s-fund-btn">Fund Fatima →</button>
+    <!-- Pre-launch card 2 -->
+    <div class="s-card reveal" style="border:2px dashed rgba(181,135,12,0.25);background:linear-gradient(135deg,rgba(181,135,12,0.03),rgba(248,245,239,0.5));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:280px;gap:1rem;">
+      <div style="font-size:1.1rem;font-weight:600;letter-spacing:0.08em;">AFRICA</div>
+      <div style="font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--ink);">54 nations. Launching soon.</div>
+      <div style="font-size:0.8rem;color:var(--ink-dim);line-height:1.6;max-width:220px;">We're verifying our first cohort of scholars across Africa. Every profile reviewed by our team before going live.</div>
+      <a href="#donate" class="s-fund-btn" style="background:var(--gold);color:var(--ink);text-decoration:none;display:inline-block;padding:0.7rem 1.4rem;border-radius:2px;font-size:0.78rem;font-weight:500;letter-spacing:0.04em;width:auto;margin-top:0.5rem;">Join as a Donor →</a>
     </div>
 
-    <div class="s-card reveal">
-      <div class="s-top">
-        <div class="s-avatar" style="background:linear-gradient(135deg,#1A1A80,#4040C0);">👨🏾</div>
-        <div class="s-info">
-          <div class="s-name">David Okonkwo</div>
-          <div class="s-country">🇰🇪 Kenya</div>
-        </div>
-        <div class="s-badge stem">STEM</div>
-      </div>
-      <div class="s-program">PhD Computational Biology</div>
-      <div class="s-uni">MIT, United States</div>
-      <div class="s-bar"><div class="s-fill" style="width:61%;"></div></div>
-      <div class="s-bottom">
-        <div class="s-raised">Raised <strong>$18,300</strong> of</div>
-        <div class="s-target">$30,000</div>
-      </div>
-      <button class="s-fund-btn">Fund David →</button>
+    <!-- Pre-launch card 3 -->
+    <div class="s-card reveal" style="border:2px dashed rgba(12,12,10,0.12);background:linear-gradient(135deg,rgba(12,12,10,0.02),rgba(248,245,239,0.5));display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:280px;gap:1rem;">
+      <div style="font-size:1.1rem;font-weight:600;letter-spacing:0.08em;">CORPORATE</div>
+      <div style="font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--ink);">Corporate sponsorship open</div>
+      <div style="font-size:0.8rem;color:var(--ink-dim);line-height:1.6;max-width:220px;">Brand your support. Featured placements, ESG impact reports, and named scholar profiles. Contact us to discuss packages.</div>
+      <a href="mailto:info@ailesglobal.com" class="s-fund-btn" style="background:var(--ink);color:var(--ivory);text-decoration:none;display:inline-block;padding:0.7rem 1.4rem;border-radius:2px;font-size:0.78rem;font-weight:500;letter-spacing:0.04em;width:auto;margin-top:0.5rem;">Enquire Now →</a>
     </div>
+
   </div>
 </section>
 
@@ -954,14 +1006,18 @@ footer{
 <footer>
   <div class="footer-logo">Ailes<span>Scholars</span></div>
   <div class="footer-copy">© 2026 Ailes Travel Holdings Limited. All rights reserved.</div>
+  <div style="display:flex;flex-direction:column;gap:0.3rem;text-align:center;">
+    <a href="tel:+256704833021" style="font-size:0.72rem;color:rgba(248,245,239,0.35);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(248,245,239,0.35)'">Call: +256 704 833 021</a>
+    <a href="mailto:info@ailesglobal.com" style="font-size:0.72rem;color:rgba(248,245,239,0.35);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(248,245,239,0.35)'">Email: info@ailesglobal.com</a>
+  </div>
   <ul class="footer-links">
     <li><a href="#">Privacy</a></li>
     <li><a href="#">Terms</a></li>
-    <li><a href="mailto:scholars@ailesglobal.com">Contact</a></li>
+    <li><a href="mailto:info@ailesglobal.com">Contact</a></li>
   </ul>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{
@@ -980,6 +1036,20 @@ footer{
   },{threshold:0.5});
   barObs.observe(document.getElementById('heroBar'));
 
+  // Hamburger menu
+  function toggleMenu(){
+    const menu=document.getElementById('mobileMenu');
+    const btn=document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
+  }
+  function closeMenu(){
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow='';
+  }
+
   function switchTab(btn,type){
     document.querySelectorAll('.cta-tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
@@ -990,16 +1060,37 @@ footer{
     else{extra.placeholder='Company name & CSR budget range';country.placeholder='Company country';}
   }
 
-  function handleJoin(){
-    const name=document.getElementById('cName').value;
-    const email=document.getElementById('cEmail').value;
-    if(name&&email&&email.includes('@')){
+  // Formspree submission
+  async function handleJoin(){
+    const name=document.getElementById('cName').value.trim();
+    const email=document.getElementById('cEmail').value.trim();
+    const country=document.getElementById('cCountry').value.trim();
+    const extra=document.getElementById('cExtra').value.trim();
+    const activeTab=document.querySelector('.cta-tab.active')?.textContent||'Scholar';
+
+    if(!name||!email||!email.includes('@')){
+      alert('Please fill in your name and a valid email address.');return;
+    }
+
+    const btn=document.querySelector('.cta-submit');
+    btn.textContent='Submitting...';btn.disabled=true;
+
+    try{
+      const res=await fetch('https://formspree.io/f/scholars@ailesglobal.com',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({name,email,country,extra,type:activeTab})
+      });
+
       document.getElementById('ctaForm').innerHTML=`
         <div style="padding:2.5rem;border:1px solid rgba(248,245,239,0.12);border-radius:4px;text-align:center;">
-          <div style="font-size:2.5rem;margin-bottom:1rem;">🎓</div>
+          <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:1rem;">Submission Confirmed</div>
           <div style="font-family:'Libre Baskerville',serif;font-size:1.5rem;color:var(--ivory);margin-bottom:0.6rem;">You're on the list, ${name.split(' ')[0]}.</div>
-          <div style="font-size:0.85rem;color:rgba(248,245,239,0.35);line-height:1.7;">We'll reach out when the platform launches.<br/>Africa's future is bright — and you're part of it.</div>
+          <div style="font-size:0.85rem;color:rgba(248,245,239,0.35);line-height:1.7;">We'll be in touch at <strong style="color:rgba(248,245,239,0.6);">${email}</strong> when the platform launches.<br/>In the meantime, reach us at info@ailesglobal.com</div>
         </div>`;
+    }catch(err){
+      btn.textContent='Join the Waitlist →';btn.disabled=false;
+      alert('Something went wrong. Please email us directly at info@ailesglobal.com');
     }
   }
 </script>
