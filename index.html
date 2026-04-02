@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ailes Scholars — Fund Africa's Brightest Minds</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #0C0C0A;
+  --ink-2: #181816;
+  --ink-3: #242420;
+  --ink-dim: #52524A;
+  --ink-faint: #8C8C82;
+  --ivory: #F8F5EF;
+  --ivory-2: #EDE9E1;
+  --ivory-3: #E2DDD4;
+  --white: #FDFCFA;
+  --gold: #B5870C;
+  --gold-light: #D4A520;
+  --gold-pale: #F0CC60;
+  --teal: #0F7A5A;
+  --teal-light: #12A678;
+  --teal-pale: #D0F0E5;
+  --rust: #B83B1A;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--ivory);
+  color:var(--ink);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+.cursor{width:7px;height:7px;background:var(--ink);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:multiply;}
+.cursor-ring{width:30px;height:30px;border:1px solid var(--ink);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;opacity:0.2;transition:transform 0.28s ease;}
+
+/* Grain */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:900;opacity:0.4;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.3rem 4rem;
+  background:rgba(248,245,239,0.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(12,12,10,0.07);
+}
+
+.logo{
+  font-family:'Libre Baskerville',serif;
+  font-size:1.1rem;font-weight:700;
+  color:var(--ink);text-decoration:none;
+  display:flex;align-items:baseline;gap:0.2rem;
+}
+.logo-accent{color:var(--gold);}
+.logo-tag{font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint);font-family:'Plus Jakarta Sans',sans-serif;margin-left:0.4rem;}
+
+.nav-mid{display:flex;gap:2.2rem;list-style:none;}
+.nav-mid a{font-size:0.78rem;letter-spacing:0.05em;color:var(--ink-dim);text-decoration:none;transition:color 0.2s;}
+.nav-mid a:hover{color:var(--ink);}
+
+.nav-right{display:flex;gap:0.7rem;align-items:center;}
+.btn-ghost{font-size:0.78rem;letter-spacing:0.05em;color:var(--ink-dim);text-decoration:none;cursor:none;padding:0.5rem 1rem;transition:color 0.2s;}
+.btn-ghost:hover{color:var(--ink);}
+.btn-dark{background:var(--ink);color:var(--ivory);padding:0.55rem 1.4rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.78rem;font-weight:500;letter-spacing:0.05em;border:none;cursor:none;border-radius:2px;text-decoration:none;transition:background 0.2s;}
+.btn-dark:hover{background:var(--ink-3);}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:8rem 4rem 5rem;
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr;
+  gap:5rem;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 60% at 100% 100%, rgba(15,122,90,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 0% 0%, rgba(181,135,12,0.04) 0%, transparent 50%);
+}
+
+.hero-left{position:relative;z-index:2;}
+
+.hero-label{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  margin-bottom:2rem;
+  opacity:0;animation:up 0.7s ease 0.15s forwards;
+}
+.hero-label-dot{width:7px;height:7px;background:var(--teal);border-radius:50%;animation:blink 2.5s infinite;}
+.hero-label-text{font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);font-weight:500;}
+
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+.hero-h1{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(3rem,5.5vw,5.5rem);
+  font-weight:700;
+  line-height:0.95;
+  letter-spacing:-0.025em;
+  color:var(--ink);
+  opacity:0;animation:up 0.8s ease 0.3s forwards;
+}
+.hero-h1 em{font-style:italic;font-weight:400;color:var(--gold);}
+
+.hero-p{
+  font-size:1rem;color:var(--ink-dim);
+  line-height:1.75;max-width:480px;
+  margin-top:2rem;
+  opacity:0;animation:up 0.8s ease 0.45s forwards;
+}
+
+.hero-actions{
+  display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap;
+  opacity:0;animation:up 0.8s ease 0.6s forwards;
+}
+
+.btn-primary{
+  background:var(--ink);color:var(--ivory);
+  padding:0.95rem 2.2rem;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.88rem;font-weight:500;letter-spacing:0.04em;
+  border:none;cursor:none;border-radius:2px;text-decoration:none;
+  transition:background 0.2s,transform 0.2s;display:inline-block;
+}
+.btn-primary:hover{background:var(--teal);transform:translateY(-2px);}
+
+.btn-outline{
+  background:transparent;color:var(--ink);
+  padding:0.95rem 2.2rem;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.88rem;letter-spacing:0.04em;
+  border:1px solid rgba(12,12,10,0.2);cursor:none;border-radius:2px;text-decoration:none;
+  transition:border-color 0.2s,color 0.2s;display:inline-block;
+}
+.btn-outline:hover{border-color:var(--ink);color:var(--ink);}
+
+.hero-proof{
+  display:flex;align-items:center;gap:1.5rem;
+  margin-top:3rem;padding-top:2rem;
+  border-top:1px solid rgba(12,12,10,0.08);
+  opacity:0;animation:up 0.8s ease 0.75s forwards;
+}
+.proof-flags{display:flex;}
+.proof-flag{width:28px;height:28px;border-radius:50%;background:var(--ivory-2);border:2px solid var(--ivory);margin-left:-7px;display:flex;align-items:center;justify-content:center;font-size:0.75rem;}
+.proof-flag:first-child{margin-left:0;}
+.proof-text{font-size:0.8rem;color:var(--ink-dim);line-height:1.4;}
+.proof-text strong{color:var(--ink);font-weight:500;}
+
+/* HERO RIGHT - Scholar Card */
+.hero-right{
+  position:relative;z-index:2;
+  opacity:0;animation:left 1s ease 0.5s forwards;
+}
+
+@keyframes left{from{opacity:0;transform:translateX(30px);}to{opacity:1;transform:translateX(0);}}
+
+.scholar-stack{position:relative;}
+
+.scholar-card{
+  background:var(--white);
+  border:1px solid rgba(12,12,10,0.08);
+  border-radius:6px;
+  padding:1.8rem;
+  box-shadow:0 4px 32px rgba(12,12,10,0.06);
+}
+
+.scholar-card-header{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:1.5rem;
+  padding-bottom:1.2rem;
+  border-bottom:1px solid rgba(12,12,10,0.06);
+}
+.scholar-avatar{
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--teal),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;flex-shrink:0;
+}
+.scholar-name{font-size:0.92rem;font-weight:600;color:var(--ink);}
+.scholar-meta{font-size:0.72rem;color:var(--ink-faint);margin-top:0.15rem;}
+.scholar-verified{
+  margin-left:auto;
+  background:var(--teal-pale);color:var(--teal);
+  font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.25rem 0.7rem;border-radius:100px;font-weight:500;
+}
+
+.scholar-program{
+  background:var(--ivory-2);border-radius:4px;
+  padding:1rem;margin-bottom:1.2rem;
+}
+.scholar-program-label{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:0.3rem;}
+.scholar-program-val{font-family:'Libre Baskerville',serif;font-size:0.95rem;color:var(--ink);}
+
+.scholar-need{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:1rem;
+}
+.scholar-need-label{font-size:0.75rem;color:var(--ink-dim);}
+.scholar-need-amount{
+  font-family:'Libre Baskerville',serif;
+  font-size:1.6rem;font-weight:700;color:var(--ink);
+}
+.scholar-need-raised{font-size:0.72rem;color:var(--teal);text-align:right;}
+
+.progress-bar{height:5px;background:rgba(12,12,10,0.07);border-radius:3px;margin-bottom:1.5rem;overflow:hidden;}
+.progress-fill{height:100%;width:0;background:var(--teal);border-radius:3px;transition:width 1.5s ease 1s;}
+
+.scholar-actions{display:flex;gap:0.6rem;}
+.btn-fund{
+  flex:1;background:var(--teal);color:var(--white);
+  padding:0.7rem;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.82rem;font-weight:500;letter-spacing:0.04em;
+  border:none;cursor:none;border-radius:2px;transition:background 0.2s;
+}
+.btn-fund:hover{background:var(--teal-light);}
+.btn-profile{
+  background:transparent;color:var(--ink);
+  border:1px solid rgba(12,12,10,0.15);
+  padding:0.7rem 1rem;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.82rem;cursor:none;border-radius:2px;transition:border-color 0.2s;
+}
+.btn-profile:hover{border-color:var(--ink);}
+
+.card-floating{
+  position:absolute;bottom:-1rem;left:-1.5rem;
+  background:var(--white);border:1px solid rgba(12,12,10,0.08);
+  border-radius:4px;padding:0.7rem 1rem;
+  display:flex;align-items:center;gap:0.7rem;
+  font-size:0.75rem;color:var(--ink);
+  box-shadow:0 4px 16px rgba(12,12,10,0.08);
+  white-space:nowrap;
+  animation:float 5s ease-in-out infinite;
+}
+.float-icon{font-size:1rem;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+
+/* TICKER */
+.ticker{
+  background:var(--ink);
+  padding:0.9rem 0;overflow:hidden;
+  border-top:1px solid rgba(248,245,239,0.05);
+  border-bottom:1px solid rgba(248,245,239,0.05);
+}
+.ticker-track{display:flex;width:max-content;animation:ticker 28s linear infinite;}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.ticker-item{
+  display:flex;align-items:center;gap:1.5rem;
+  padding:0 2.5rem;font-size:0.72rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(248,245,239,0.4);white-space:nowrap;
+}
+.ticker-item span{color:var(--gold);font-size:0.8rem;}
+
+/* HOW IT WORKS */
+.how-section{padding:7rem 4rem;background:var(--white);}
+
+.section-eyebrow{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:0.7rem;}
+.section-h2{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.8rem,3.5vw,3rem);
+  font-weight:700;line-height:1.05;color:var(--ink);
+  max-width:560px;
+}
+.section-h2 em{font-style:italic;color:var(--gold);font-weight:400;}
+
+.how-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;margin-top:4rem;
+  background:rgba(12,12,10,0.06);
+  border:1px solid rgba(12,12,10,0.06);
+}
+
+.how-card{
+  background:var(--white);padding:2.5rem 2rem;
+  transition:background 0.2s;
+}
+.how-card:hover{background:var(--ivory);}
+
+.how-num{
+  font-family:'Libre Baskerville',serif;
+  font-size:3rem;font-weight:700;
+  color:rgba(12,12,10,0.06);line-height:1;
+  margin-bottom:1.2rem;transition:color 0.2s;
+}
+.how-card:hover .how-num{color:rgba(12,12,10,0.12);}
+.how-icon{font-size:1.5rem;margin-bottom:1rem;}
+.how-title{font-size:0.92rem;font-weight:600;color:var(--ink);margin-bottom:0.5rem;}
+.how-desc{font-size:0.8rem;color:var(--ink-dim);line-height:1.65;}
+
+/* SCHOLAR PROFILES */
+.scholars-section{padding:7rem 4rem;background:var(--ivory);}
+
+.scholars-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:3rem;
+}
+
+.scholars-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+
+.s-card{
+  background:var(--white);
+  border:1px solid rgba(12,12,10,0.07);
+  border-radius:4px;
+  padding:2rem;
+  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
+  cursor:none;
+}
+.s-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(12,12,10,0.08);
+  border-color:rgba(12,12,10,0.15);
+}
+
+.s-top{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem;}
+.s-avatar{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.s-info{flex:1;}
+.s-name{font-size:0.88rem;font-weight:600;color:var(--ink);}
+.s-country{font-size:0.7rem;color:var(--ink-faint);margin-top:0.1rem;}
+.s-badge{
+  font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.2rem 0.6rem;border-radius:100px;font-weight:500;
+}
+.s-badge.stem{background:rgba(15,122,90,0.1);color:var(--teal);}
+.s-badge.arts{background:rgba(181,135,12,0.1);color:var(--gold);}
+.s-badge.law{background:rgba(184,59,26,0.1);color:var(--rust);}
+
+.s-program{
+  font-family:'Libre Baskerville',serif;
+  font-size:0.88rem;color:var(--ink);
+  line-height:1.3;margin-bottom:0.4rem;
+}
+.s-uni{font-size:0.72rem;color:var(--ink-faint);margin-bottom:1.2rem;}
+
+.s-bar{height:3px;background:rgba(12,12,10,0.06);border-radius:2px;margin-bottom:0.5rem;overflow:hidden;}
+.s-fill{height:100%;border-radius:2px;background:var(--teal);}
+
+.s-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:1.2rem;
+}
+.s-raised{font-size:0.72rem;color:var(--ink-dim);}
+.s-raised strong{color:var(--ink);font-weight:500;}
+.s-target{
+  font-family:'Libre Baskerville',serif;
+  font-size:1.1rem;font-weight:700;color:var(--ink);
+}
+
+.s-fund-btn{
+  width:100%;margin-top:1rem;
+  background:var(--ink);color:var(--ivory);
+  padding:0.7rem;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.78rem;font-weight:500;letter-spacing:0.04em;
+  border:none;cursor:none;border-radius:2px;
+  transition:background 0.2s;
+}
+.s-fund-btn:hover{background:var(--teal);}
+
+/* TWO SIDES */
+.sides-section{
+  background:var(--ink);
+  padding:7rem 4rem;
+}
+
+.sides-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;margin-top:4rem;
+}
+
+.side-card{
+  border:1px solid rgba(248,245,239,0.1);
+  border-radius:4px;padding:3rem;
+  transition:border-color 0.3s;
+}
+.side-card:hover{border-color:rgba(248,245,239,0.25);}
+
+.side-tag{
+  display:inline-block;font-size:0.65rem;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--ink);background:var(--gold);
+  padding:0.25rem 0.8rem;border-radius:100px;
+  margin-bottom:1.5rem;font-weight:500;
+}
+.side-card.students .side-tag{background:var(--teal-light);color:var(--white);}
+
+.side-h3{
+  font-family:'Libre Baskerville',serif;
+  font-size:1.7rem;font-weight:700;
+  color:var(--ivory);line-height:1.1;margin-bottom:0.8rem;
+}
+.side-h3 em{font-style:italic;color:var(--gold-pale);font-weight:400;}
+.side-p{font-size:0.88rem;color:rgba(248,245,239,0.5);line-height:1.7;margin-bottom:2rem;}
+
+.side-list{list-style:none;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2.5rem;}
+.side-list li{
+  display:flex;align-items:flex-start;gap:0.75rem;
+  font-size:0.85rem;color:rgba(248,245,239,0.55);
+  line-height:1.5;padding-bottom:0.8rem;
+  border-bottom:1px solid rgba(248,245,239,0.05);
+}
+.side-list li:last-child{border-bottom:none;}
+.side-check{color:var(--gold-pale);flex-shrink:0;}
+.side-card.students .side-check{color:var(--teal-light);}
+
+/* REVENUE MODEL */
+.revenue-section{padding:7rem 4rem;background:var(--ivory-2);}
+
+.revenue-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:5rem;margin-top:4rem;align-items:center;
+}
+
+.revenue-table{
+  background:var(--white);
+  border:1px solid rgba(12,12,10,0.08);
+  border-radius:4px;overflow:hidden;
+}
+.revenue-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 1.5rem;
+  border-bottom:1px solid rgba(12,12,10,0.05);
+  font-size:0.85rem;transition:background 0.2s;
+}
+.revenue-row:hover{background:var(--ivory);}
+.revenue-row:last-child{border-bottom:none;}
+.revenue-row-label{color:var(--ink-dim);}
+.revenue-row-val{color:var(--ink);font-weight:500;}
+.revenue-row-val.highlight{
+  font-family:'Libre Baskerville',serif;
+  font-size:1rem;color:var(--teal);
+}
+.revenue-row-val.gold{color:var(--gold);}
+
+.revenue-title{
+  font-family:'Libre Baskerville',serif;
+  font-size:0.75rem;font-weight:700;
+  color:var(--ink-faint);letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:1rem 1.5rem;
+  background:var(--ivory-2);
+  border-bottom:1px solid rgba(12,12,10,0.06);
+}
+
+.revenue-facts{display:flex;flex-direction:column;gap:1.5rem;}
+.revenue-fact{
+  padding:1.5rem;
+  border-left:3px solid var(--ink);
+  background:var(--white);
+}
+.revenue-fact-title{font-size:0.9rem;font-weight:600;color:var(--ink);margin-bottom:0.4rem;}
+.revenue-fact-desc{font-size:0.82rem;color:var(--ink-dim);line-height:1.65;}
+
+/* IMPACT */
+.impact-section{padding:7rem 4rem;background:var(--white);}
+
+.impact-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin-top:4rem;
+  border:1px solid rgba(12,12,10,0.08);
+}
+.impact-cell{
+  padding:2.5rem 2rem;
+  border-right:1px solid rgba(12,12,10,0.08);
+  transition:background 0.2s;
+}
+.impact-cell:last-child{border-right:none;}
+.impact-cell:hover{background:var(--ivory);}
+.impact-num{
+  font-family:'Libre Baskerville',serif;
+  font-size:3rem;font-weight:700;
+  color:var(--ink);line-height:1;margin-bottom:0.4rem;
+}
+.impact-num span{color:var(--teal);}
+.impact-label{font-size:0.78rem;color:var(--ink-dim);line-height:1.5;}
+
+/* CTA */
+.cta-section{
+  padding:8rem 4rem;background:var(--ink);
+  position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(15,122,90,0.08) 0%, transparent 70%);
+}
+.cta-inner{
+  max-width:700px;margin:0 auto;
+  text-align:center;position:relative;z-index:2;
+}
+.cta-h2{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(2.2rem,5vw,4.5rem);
+  font-weight:700;color:var(--ivory);
+  line-height:1;letter-spacing:-0.02em;margin-bottom:1.2rem;
+}
+.cta-h2 em{font-style:italic;color:var(--gold-pale);font-weight:400;}
+.cta-p{font-size:0.95rem;color:rgba(248,245,239,0.45);line-height:1.75;margin-bottom:3rem;}
+
+.cta-tabs{
+  display:flex;gap:0;
+  background:rgba(248,245,239,0.05);
+  border:1px solid rgba(248,245,239,0.1);
+  border-radius:2px;overflow:hidden;
+  margin-bottom:2rem;width:fit-content;
+  margin-left:auto;margin-right:auto;
+}
+.cta-tab{
+  padding:0.65rem 1.6rem;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.78rem;font-weight:500;letter-spacing:0.05em;
+  background:transparent;color:rgba(248,245,239,0.35);
+  border:none;cursor:none;transition:background 0.2s,color 0.2s;
+}
+.cta-tab.active{background:var(--gold);color:var(--ink);}
+
+.cta-form{
+  display:flex;flex-direction:column;
+  gap:0.75rem;max-width:420px;
+  margin:0 auto;
+}
+.cta-input{
+  background:rgba(248,245,239,0.05);
+  border:1px solid rgba(248,245,239,0.1);
+  padding:0.85rem 1.2rem;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.85rem;color:var(--ivory);
+  outline:none;border-radius:2px;
+  transition:border-color 0.2s;
+}
+.cta-input:focus{border-color:var(--gold);}
+.cta-input::placeholder{color:rgba(248,245,239,0.2);}
+.cta-submit{
+  background:var(--teal);color:var(--white);
+  border:none;padding:1rem;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.88rem;font-weight:500;letter-spacing:0.05em;
+  cursor:none;border-radius:2px;transition:background 0.2s;
+}
+.cta-submit:hover{background:var(--teal-light);}
+.cta-note{font-size:0.7rem;color:rgba(248,245,239,0.2);margin-top:0.5rem;letter-spacing:0.04em;}
+
+/* FOOTER */
+footer{
+  background:var(--ink-2);
+  border-top:1px solid rgba(248,245,239,0.05);
+  padding:2.5rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-logo{font-family:'Libre Baskerville',serif;font-size:0.95rem;font-weight:700;color:var(--ivory);}
+.footer-logo span{color:var(--gold);}
+.footer-copy{font-size:0.72rem;color:rgba(248,245,239,0.2);}
+.footer-links{display:flex;gap:2rem;list-style:none;}
+.footer-links a{font-size:0.72rem;color:rgba(248,245,239,0.25);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;}
+.footer-links a:hover{color:var(--gold);}
+
+/* Animations */
+@keyframes up{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.75s ease,transform 0.75s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* Responsive */
+@media(max-width:960px){
+  nav{padding:1.2rem 1.5rem;}
+  .nav-mid{display:none;}
+  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem;gap:3rem;}
+  .how-grid{grid-template-columns:1fr 1fr;}
+  .scholars-grid{grid-template-columns:1fr;}
+  .sides-grid{grid-template-columns:1fr;}
+  .revenue-grid{grid-template-columns:1fr;}
+  .impact-grid{grid-template-columns:1fr 1fr;}
+  .how-section,.scholars-section,.sides-section,.revenue-section,.impact-section,.cta-section{padding:5rem 1.5rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Ailes<span class="logo-accent">Scholars</span><span class="logo-tag">by Ailes Global</span></a>
+  <ul class="nav-mid">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#scholars">Browse Scholars</a></li>
+    <li><a href="#donors">For Donors</a></li>
+    <li><a href="#revenue">The Model</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#apply" class="btn-ghost">Apply as Scholar</a>
+    <a href="#donate" class="btn-dark">Fund a Scholar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-left">
+    <div class="hero-label">
+      <div class="hero-label-dot"></div>
+      <div class="hero-label-text">Africa's Scholar Funding Platform</div>
+    </div>
+
+    <h1 class="hero-h1">
+      Fund Africa's<br/>
+      <em>brightest</em><br/>
+      minds directly.
+    </h1>
+
+    <p class="hero-p">
+      Ailes Scholars connects the world's donors and sponsors directly to Africa's most exceptional students — verified, listed, and ready to change the world with your support.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#scholars" class="btn-primary">Browse Scholars</a>
+      <a href="#apply" class="btn-outline">Apply as a Scholar</a>
+    </div>
+
+    <div class="hero-proof">
+      <div class="proof-flags">
+        <div class="proof-flag">🇺🇬</div>
+        <div class="proof-flag">🇰🇪</div>
+        <div class="proof-flag">🇳🇬</div>
+        <div class="proof-flag">🇬🇭</div>
+        <div class="proof-flag">🇿🇦</div>
+        <div class="proof-flag">🇪🇹</div>
+      </div>
+      <div class="proof-text">
+        <strong>54 African nations</strong> represented.<br/>
+        Every verified scholar is personally reviewed.
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="scholar-stack">
+      <div class="scholar-card">
+        <div class="scholar-card-header">
+          <div class="scholar-avatar">👩🏾</div>
+          <div>
+            <div class="scholar-name">Amara Nakato</div>
+            <div class="scholar-meta">Uganda · BSc Computer Science</div>
+          </div>
+          <div class="scholar-verified">✓ Verified</div>
+        </div>
+
+        <div class="scholar-program">
+          <div class="scholar-program-label">Program</div>
+          <div class="scholar-program-val">MSc Artificial Intelligence — University of Edinburgh</div>
+        </div>
+
+        <div class="scholar-need">
+          <div>
+            <div class="scholar-need-label">Funding needed</div>
+            <div class="scholar-need-amount">$15,000</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="scholar-need-label">Raised so far</div>
+            <div class="scholar-need-raised" style="font-size:1rem;font-weight:600;">$12,400 <span style="font-size:0.7rem;font-weight:400;">(69%)</span></div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="heroBar" style="width:0;"></div>
+        </div>
+
+        <div class="scholar-actions">
+          <button class="btn-fund">Fund Amara →</button>
+          <button class="btn-profile">View Profile</button>
+        </div>
+      </div>
+
+      <div class="card-floating">
+        <div class="float-icon">🎉</div>
+        <div>James from London just donated <strong>$500</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item"><span>✦</span> Computer Science</div>
+    <div class="ticker-item"><span>✦</span> Medicine & Healthcare</div>
+    <div class="ticker-item"><span>✦</span> Environmental Science</div>
+    <div class="ticker-item"><span>✦</span> Law & Policy</div>
+    <div class="ticker-item"><span>✦</span> Engineering</div>
+    <div class="ticker-item"><span>✦</span> Data Science & AI</div>
+    <div class="ticker-item"><span>✦</span> Economics</div>
+    <div class="ticker-item"><span>✦</span> Public Health</div>
+    <div class="ticker-item"><span>✦</span> Renewable Energy</div>
+    <div class="ticker-item"><span>✦</span> Architecture</div>
+    <div class="ticker-item"><span>✦</span> Computer Science</div>
+    <div class="ticker-item"><span>✦</span> Medicine & Healthcare</div>
+    <div class="ticker-item"><span>✦</span> Environmental Science</div>
+    <div class="ticker-item"><span>✦</span> Law & Policy</div>
+    <div class="ticker-item"><span>✦</span> Engineering</div>
+    <div class="ticker-item"><span>✦</span> Data Science & AI</div>
+    <div class="ticker-item"><span>✦</span> Economics</div>
+    <div class="ticker-item"><span>✦</span> Public Health</div>
+    <div class="ticker-item"><span>✦</span> Renewable Energy</div>
+    <div class="ticker-item"><span>✦</span> Architecture</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section-eyebrow reveal">How it works</div>
+  <h2 class="section-h2 reveal">Simple for scholars.<br/><em>Simple for donors.</em></h2>
+
+  <div class="how-grid">
+    <div class="how-card reveal">
+      <div class="how-num">01</div>
+      <div class="how-icon">📋</div>
+      <div class="how-title">Scholars apply</div>
+      <div class="how-desc">Top African students submit their profile — academic record, program, university acceptance, and funding need. Every application is reviewed by our team.</div>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-num">02</div>
+      <div class="how-icon">✅</div>
+      <div class="how-title">We verify & list</div>
+      <div class="how-desc">Only the best get listed. We verify admission letters, academic credentials, and funding gaps. Every scholar on the platform is genuine and exceptional.</div>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-num">03</div>
+      <div class="how-icon">💳</div>
+      <div class="how-title">Donors fund directly</div>
+      <div class="how-desc">Individuals, corporates, and foundations browse scholar profiles and fund anyone they connect with. Full transparency on where every dollar goes.</div>
+    </div>
+    <div class="how-card reveal">
+      <div class="how-num">04</div>
+      <div class="how-icon">🎓</div>
+      <div class="how-title">Scholars fly & study</div>
+      <div class="how-desc">Once funded, Ailes Travel handles visa and relocation. Donors receive progress updates. The scholar begins their journey — and changes Africa from the outside.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHOLAR PROFILES -->
+<section class="scholars-section" id="scholars">
+  <div class="scholars-header">
+    <div>
+      <div class="section-eyebrow reveal">Featured scholars</div>
+      <h2 class="section-h2 reveal">Meet the minds<br/><em>worth funding.</em></h2>
+    </div>
+    <a href="#apply" class="btn-primary reveal" style="height:fit-content;">View All Scholars →</a>
+  </div>
+
+  <div class="scholars-grid">
+    <div class="s-card reveal">
+      <div class="s-top">
+        <div class="s-avatar" style="background:linear-gradient(135deg,#0F7A5A,#12A678);">👨🏿</div>
+        <div class="s-info">
+          <div class="s-name">Kwame Asante</div>
+          <div class="s-country">🇬🇭 Ghana</div>
+        </div>
+        <div class="s-badge stem">STEM</div>
+      </div>
+      <div class="s-program">MSc Renewable Energy Engineering</div>
+      <div class="s-uni">Imperial College London, UK</div>
+      <div class="s-bar"><div class="s-fill" style="width:82%;"></div></div>
+      <div class="s-bottom">
+        <div class="s-raised">Raised <strong>$24,600</strong> of</div>
+        <div class="s-target">$30,000</div>
+      </div>
+      <button class="s-fund-btn">Fund Kwame →</button>
+    </div>
+
+    <div class="s-card reveal">
+      <div class="s-top">
+        <div class="s-avatar" style="background:linear-gradient(135deg,#B5870C,#D4A520);">👩🏽</div>
+        <div class="s-info">
+          <div class="s-name">Fatima Al-Hassan</div>
+          <div class="s-country">🇳🇬 Nigeria</div>
+        </div>
+        <div class="s-badge law">Law</div>
+      </div>
+      <div class="s-program">LLM International Human Rights Law</div>
+      <div class="s-uni">University of Oxford, UK</div>
+      <div class="s-bar"><div class="s-fill" style="width:45%;"></div></div>
+      <div class="s-bottom">
+        <div class="s-raised">Raised <strong>$10,800</strong> of</div>
+        <div class="s-target">$24,000</div>
+      </div>
+      <button class="s-fund-btn">Fund Fatima →</button>
+    </div>
+
+    <div class="s-card reveal">
+      <div class="s-top">
+        <div class="s-avatar" style="background:linear-gradient(135deg,#1A1A80,#4040C0);">👨🏾</div>
+        <div class="s-info">
+          <div class="s-name">David Okonkwo</div>
+          <div class="s-country">🇰🇪 Kenya</div>
+        </div>
+        <div class="s-badge stem">STEM</div>
+      </div>
+      <div class="s-program">PhD Computational Biology</div>
+      <div class="s-uni">MIT, United States</div>
+      <div class="s-bar"><div class="s-fill" style="width:61%;"></div></div>
+      <div class="s-bottom">
+        <div class="s-raised">Raised <strong>$18,300</strong> of</div>
+        <div class="s-target">$30,000</div>
+      </div>
+      <button class="s-fund-btn">Fund David →</button>
+    </div>
+  </div>
+</section>
+
+<!-- TWO SIDES -->
+<section class="sides-section" id="donors">
+  <div class="section-eyebrow reveal" style="color:var(--gold);">Who it serves</div>
+  <h2 class="section-h2 reveal" style="color:var(--ivory);">Built for two sides<br/><em>of one mission.</em></h2>
+
+  <div class="sides-grid">
+    <div class="side-card students reveal">
+      <div class="side-tag">For Scholars</div>
+      <div class="side-h3">Africa's top <em>students</em></div>
+      <div class="side-p">You've been accepted. You have the grades. All you need is the funding — and a platform that believes in you enough to put you in front of the world.</div>
+      <ul class="side-list">
+        <li><span class="side-check">✦</span>Free to apply — no listing fees ever</li>
+        <li><span class="side-check">✦</span>Personal profile page with your story, program, and goals</li>
+        <li><span class="side-check">✦</span>Direct funding — donors send money straight to your needs</li>
+        <li><span class="side-check">✦</span>Visa & relocation support via Ailes Travel once funded</li>
+        <li><span class="side-check">✦</span>Mentorship connections with diaspora professionals</li>
+        <li><span class="side-check">✦</span>Open to all 54 African nations — no country excluded</li>
+      </ul>
+      <a href="#apply" class="btn-primary">Apply as a Scholar →</a>
+    </div>
+
+    <div class="side-card reveal">
+      <div class="side-tag">For Donors & Sponsors</div>
+      <div class="side-h3">Change a life.<br/><em>Change a continent.</em></div>
+      <div class="side-p">Your donation doesn't disappear into a fund. It goes to a real person with a name, a dream, and a plan — and you watch it happen.</div>
+      <ul class="side-list">
+        <li><span class="side-check">✦</span>Browse verified scholars — fund anyone you connect with</li>
+        <li><span class="side-check">✦</span>Full transparency — see exactly how funds are used</li>
+        <li><span class="side-check">✦</span>Corporate sponsorship with brand visibility on profiles</li>
+        <li><span class="side-check">✦</span>Progress updates — follow your scholar's journey</li>
+        <li><span class="side-check">✦</span>Impact certificates for CSR and ESG reporting</li>
+        <li><span class="side-check">✦</span>Tax deductibility documentation where applicable</li>
+      </ul>
+      <a href="#donate" class="btn-primary" style="background:var(--gold);color:var(--ink);">Fund a Scholar →</a>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE MODEL -->
+<section class="revenue-section" id="revenue">
+  <div class="section-eyebrow reveal">The business model</div>
+  <h2 class="section-h2 reveal">Honest, transparent,<br/><em>commission-based.</em></h2>
+
+  <div class="revenue-grid">
+    <div class="revenue-table reveal">
+      <div class="revenue-title">How Ailes earns — per $10,000 donation</div>
+      <div class="revenue-row"><div class="revenue-row-label">Donor sends</div><div class="revenue-row-val highlight">$10,000</div></div>
+      <div class="revenue-row"><div class="revenue-row-label">Platform commission (10%)</div><div class="revenue-row-val gold">$1,000</div></div>
+      <div class="revenue-row"><div class="revenue-row-label">Scholar receives</div><div class="revenue-row-val highlight">$9,000</div></div>
+      <div class="revenue-row"><div class="revenue-row-label">Processing fees (~2.5%)</div><div class="revenue-row-val">$250</div></div>
+      <div class="revenue-row"><div class="revenue-row-label">Ailes net revenue</div><div class="revenue-row-val gold">$750</div></div>
+      <div class="revenue-row"><div class="revenue-row-label">Zero capital required</div><div class="revenue-row-val highlight">✓</div></div>
+    </div>
+
+    <div class="revenue-facts">
+      <div class="revenue-fact reveal">
+        <div class="revenue-fact-title">No lending. No risk.</div>
+        <div class="revenue-fact-desc">Unlike ISA financing, we never lend a dollar. We match donors to scholars and take a commission — zero capital at risk, immediate revenue from day one.</div>
+      </div>
+      <div class="revenue-fact reveal">
+        <div class="revenue-fact-title">Scales with volume</div>
+        <div class="revenue-fact-desc">100 scholars raising $15,000 each = $1.5M in donations = $150,000 in commission annually. 500 scholars = $750,000/year. The model compounds fast.</div>
+      </div>
+      <div class="revenue-fact reveal">
+        <div class="revenue-fact-title">Corporate sponsorship premium</div>
+        <div class="revenue-fact-desc">Companies pay extra for featured placements, branded scholar profiles, and ESG impact reports. This adds a high-margin revenue layer on top of commissions.</div>
+      </div>
+      <div class="revenue-fact reveal">
+        <div class="revenue-fact-title">Ailes Travel upsell</div>
+        <div class="revenue-fact-desc">Every fully funded scholar needs a visa and relocation. Ailes Travel handles this — creating a natural second revenue stream from the same customer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT NUMBERS -->
+<section class="impact-section">
+  <div class="section-eyebrow reveal">Our vision</div>
+  <h2 class="section-h2 reveal">The impact we're<br/><em>building toward.</em></h2>
+  <div class="impact-grid reveal">
+    <div class="impact-cell">
+      <div class="impact-num">1<span>K</span></div>
+      <div class="impact-label">Scholars listed and funded in year one</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">54</div>
+      <div class="impact-label">African nations represented on the platform</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">$<span>0</span></div>
+      <div class="impact-label">Capital required to launch — pure marketplace</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">10<span>%</span></div>
+      <div class="impact-label">Commission — transparent and displayed on every donation</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="donate">
+  <div class="cta-inner">
+    <h2 class="cta-h2 reveal">Your next move<br/>changes a <em>life.</em></h2>
+    <p class="cta-p reveal">Join the waitlist — whether you're a scholar ready to be listed or a donor ready to fund the next generation of African leaders.</p>
+
+    <div class="cta-tabs reveal">
+      <button class="cta-tab active" onclick="switchTab(this,'scholar')">I'm a Scholar</button>
+      <button class="cta-tab" onclick="switchTab(this,'donor')">I'm a Donor</button>
+      <button class="cta-tab" onclick="switchTab(this,'corporate')">Corporate</button>
+    </div>
+
+    <div class="cta-form reveal" id="ctaForm">
+      <input class="cta-input" type="text" placeholder="Full name" id="cName"/>
+      <input class="cta-input" type="email" placeholder="Email address" id="cEmail"/>
+      <input class="cta-input" type="text" placeholder="Country" id="cCountry"/>
+      <input class="cta-input" type="text" id="cExtra" placeholder="University & program you're applying to"/>
+      <button class="cta-submit" onclick="handleJoin()">Join the Waitlist →</button>
+      <div class="cta-note">No spam. We'll contact you when the platform launches.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ailes<span>Scholars</span></div>
+  <div class="footer-copy">© 2026 Ailes Travel Holdings Limited. All rights reserved.</div>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="mailto:scholars@ailesglobal.com">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+  const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;
+    cur.style.transform=`translate(${mx-3.5}px,${my-3.5}px)`;
+  });
+  (function loop(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.transform=`translate(${rx-15}px,${ry-15}px)`;requestAnimationFrame(loop);})();
+
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*65);obs.unobserve(e.target);}});
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  const barObs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){document.getElementById('heroBar').style.width='69%';barObs.disconnect();}
+  },{threshold:0.5});
+  barObs.observe(document.getElementById('heroBar'));
+
+  function switchTab(btn,type){
+    document.querySelectorAll('.cta-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const extra=document.getElementById('cExtra');
+    const country=document.getElementById('cCountry');
+    if(type==='scholar'){extra.placeholder='University & program you\'re applying to';}
+    else if(type==='donor'){extra.placeholder='How much are you looking to donate?';country.placeholder='Your country';}
+    else{extra.placeholder='Company name & CSR budget range';country.placeholder='Company country';}
+  }
+
+  function handleJoin(){
+    const name=document.getElementById('cName').value;
+    const email=document.getElementById('cEmail').value;
+    if(name&&email&&email.includes('@')){
+      document.getElementById('ctaForm').innerHTML=`
+        <div style="padding:2.5rem;border:1px solid rgba(248,245,239,0.12);border-radius:4px;text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:1rem;">🎓</div>
+          <div style="font-family:'Libre Baskerville',serif;font-size:1.5rem;color:var(--ivory);margin-bottom:0.6rem;">You're on the list, ${name.split(' ')[0]}.</div>
+          <div style="font-size:0.85rem;color:rgba(248,245,239,0.35);line-height:1.7;">We'll reach out when the platform launches.<br/>Africa's future is bright — and you're part of it.</div>
+        </div>`;
+    }
+  }
+</script>
+</body>
+</html>
