@@ -4,6 +4,14 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Ailes Scholars — Fund Africa's Brightest Minds</title>
+<meta name="description" content="Ailes Scholars connects donors and sponsors to verified African students. Join the waitlist as a scholar, donor, or corporate partner."/>
+<meta property="og:title" content="Ailes Scholars — Fund Africa's Brightest Minds"/>
+<meta property="og:description" content="Support verified African scholars through a transparent funding platform. Join the waitlist today."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://ailesglobal.com"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Ailes Scholars — Fund Africa's Brightest Minds"/>
+<meta name="twitter:description" content="Join as a scholar, donor, or corporate partner and support Africa's next generation of leaders."/>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -556,6 +564,38 @@ nav{
 }
 .cta-submit:hover{background:var(--teal-light);}
 .cta-note{font-size:0.7rem;color:rgba(248,245,239,0.2);margin-top:0.5rem;letter-spacing:0.04em;}
+.cta-consent{display:flex;gap:0.5rem;align-items:flex-start;font-size:0.72rem;color:rgba(248,245,239,0.45);text-align:left;line-height:1.5;}
+.cta-consent input{margin-top:0.15rem;accent-color:var(--gold);}
+.hp-field{position:absolute;left:-9999px;opacity:0;pointer-events:none;}
+
+/* TRUST */
+.trust-section{padding:7rem 4rem;background:var(--ivory-2);}
+.trust-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:2rem;margin-top:3.2rem;}
+.trust-card{background:var(--white);border:1px solid rgba(12,12,10,0.08);padding:2rem;border-radius:4px;}
+.trust-list{list-style:none;display:flex;flex-direction:column;gap:0.8rem;}
+.trust-list li{font-size:0.84rem;color:var(--ink-dim);line-height:1.7;border-bottom:1px solid rgba(12,12,10,0.06);padding-bottom:0.8rem;}
+.trust-list li:last-child{border-bottom:none;}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;}
+.team-card{border:1px solid rgba(12,12,10,0.08);border-radius:4px;padding:1rem;background:var(--ivory);}
+.team-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--ivory);font-size:0.75rem;letter-spacing:0.06em;margin-bottom:0.6rem;}
+.team-name{font-size:0.82rem;font-weight:600;color:var(--ink);}
+.team-role{font-size:0.72rem;color:var(--ink-faint);margin-top:0.1rem;}
+
+/* ROADMAP */
+.roadmap-section{padding:7rem 4rem;background:var(--white);}
+.roadmap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
+.roadmap-card{border:1px solid rgba(12,12,10,0.08);background:var(--ivory);padding:1.4rem;border-radius:4px;}
+.roadmap-phase{font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:0.4rem;}
+.roadmap-title{font-family:'Libre Baskerville',serif;font-size:1.05rem;color:var(--ink);margin-bottom:0.7rem;}
+.roadmap-points{list-style:none;display:flex;flex-direction:column;gap:0.45rem;}
+.roadmap-points li{font-size:0.78rem;color:var(--ink-dim);line-height:1.55;}
+
+/* LEGAL */
+.legal-section{padding:5rem 4rem;background:var(--ivory-2);}
+.legal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;}
+.legal-card{background:var(--white);border:1px solid rgba(12,12,10,0.08);border-radius:4px;padding:1.5rem;}
+.legal-card h3{font-size:0.95rem;color:var(--ink);margin-bottom:0.55rem;}
+.legal-card p{font-size:0.8rem;color:var(--ink-dim);line-height:1.65;}
 
 /* FOOTER */
 footer{
@@ -637,12 +677,14 @@ footer{
   .sides-grid{grid-template-columns:1fr;}
   .revenue-grid{grid-template-columns:1fr;}
   .impact-grid{grid-template-columns:1fr 1fr;}
-  .how-section,.scholars-section,.sides-section,.revenue-section,.impact-section,.cta-section{padding:5rem 1.5rem;}
+  .how-section,.scholars-section,.sides-section,.revenue-section,.impact-section,.cta-section,.trust-section,.roadmap-section,.legal-section{padding:5rem 1.5rem;}
   footer{padding:2rem 1.5rem;flex-direction:column;text-align:center;}
   .scholars-header{flex-direction:column;align-items:flex-start;gap:1.5rem;}
   .hero-right{display:none;}
   .card-floating{left:0;bottom:-0.5rem;}
   .side-card{padding:2rem 1.5rem;}
+  .trust-grid,.legal-grid{grid-template-columns:1fr;}
+  .roadmap-grid{grid-template-columns:1fr;}
 }
 
 @media(max-width:480px){
@@ -670,8 +712,8 @@ footer{
     <li><a href="#revenue">The Model</a></li>
   </ul>
   <div class="nav-right">
-    <a href="#apply" class="btn-ghost">Apply as Scholar</a>
-    <a href="#donate" class="btn-dark">Fund a Scholar</a>
+    <a href="#donate" class="btn-ghost" data-cta="nav-scholar">Apply as Scholar</a>
+    <a href="#donate" class="btn-dark" data-cta="nav-primary">Join Waitlist</a>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -685,8 +727,8 @@ footer{
   <a href="#donors" onclick="closeMenu()">For Donors</a>
   <a href="#revenue" onclick="closeMenu()">The Model</a>
   <div class="mobile-menu-actions">
-    <a href="#apply" class="btn-primary" onclick="closeMenu()" style="text-align:center;">Apply as a Scholar →</a>
-    <a href="#donate" class="btn-outline" onclick="closeMenu()" style="text-align:center;">Fund a Scholar</a>
+    <a href="#donate" class="btn-primary" onclick="closeMenu()" style="text-align:center;" data-cta="mobile-scholar">Apply as a Scholar →</a>
+    <a href="#donate" class="btn-outline" onclick="closeMenu()" style="text-align:center;" data-cta="mobile-donor">Fund a Scholar</a>
   </div>
   <div class="mobile-menu-contact">
     <span>Get in touch</span>
@@ -716,8 +758,8 @@ footer{
     </p>
 
     <div class="hero-actions">
-      <a href="#scholars" class="btn-primary">Browse Scholars</a>
-      <a href="#apply" class="btn-outline">Apply as a Scholar</a>
+      <a href="#donate" class="btn-primary" data-cta="hero-primary">Join Waitlist</a>
+      <a href="#scholars" class="btn-outline" data-cta="hero-secondary">Browse Scholars</a>
     </div>
 
     <div class="hero-proof">
@@ -769,7 +811,7 @@ footer{
         </div>
 
         <div class="scholar-actions">
-          <a href="#apply" class="btn-fund" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">Join Waitlist →</a>
+          <a href="#donate" class="btn-fund" style="text-decoration:none;display:flex;align-items:center;justify-content:center;" data-cta="hero-card-waitlist">Join Waitlist →</a>
           <a href="#how" class="btn-profile" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">Learn More</a>
         </div>
       </div>
@@ -848,7 +890,7 @@ footer{
       <div class="section-eyebrow reveal">Featured scholars</div>
       <h2 class="section-h2 reveal">Meet the minds<br/><em>worth funding.</em></h2>
     </div>
-    <a href="#apply" class="btn-primary reveal" style="height:fit-content;">View All Scholars →</a>
+    <a href="#donate" class="btn-primary reveal" style="height:fit-content;" data-cta="scholars-viewall">View All Scholars →</a>
   </div>
 
   <div class="scholars-grid">
@@ -858,7 +900,7 @@ footer{
       <div style="font-size:1.1rem;font-weight:600;letter-spacing:0.08em;">SCHOLAR</div>
       <div style="font-family:'Libre Baskerville',serif;font-size:1rem;font-weight:700;color:var(--ink);">Be our first listed scholar</div>
       <div style="font-size:0.8rem;color:var(--ink-dim);line-height:1.6;max-width:220px;">Are you an African student with university acceptance? Apply now — free to list, no hidden fees.</div>
-      <a href="#apply" class="s-fund-btn" style="background:var(--teal);color:var(--white);text-decoration:none;display:inline-block;padding:0.7rem 1.4rem;border-radius:2px;font-size:0.78rem;font-weight:500;letter-spacing:0.04em;width:auto;margin-top:0.5rem;">Apply as a Scholar →</a>
+      <a href="#donate" class="s-fund-btn" style="background:var(--teal);color:var(--white);text-decoration:none;display:inline-block;padding:0.7rem 1.4rem;border-radius:2px;font-size:0.78rem;font-weight:500;letter-spacing:0.04em;width:auto;margin-top:0.5rem;" data-cta="scholars-apply">Apply as a Scholar →</a>
     </div>
 
     <!-- Pre-launch card 2 -->
@@ -898,7 +940,7 @@ footer{
         <li><span class="side-check">✦</span>Mentorship connections with diaspora professionals</li>
         <li><span class="side-check">✦</span>Open to all 54 African nations — no country excluded</li>
       </ul>
-      <a href="#apply" class="btn-primary">Apply as a Scholar →</a>
+      <a href="#donate" class="btn-primary" data-cta="students-apply">Apply as a Scholar →</a>
     </div>
 
     <div class="side-card reveal">
@@ -925,13 +967,13 @@ footer{
 
   <div class="revenue-grid">
     <div class="revenue-table reveal">
-      <div class="revenue-title">How Ailes earns — per $10,000 donation</div>
+      <div class="revenue-title">Donation breakdown — per $10,000 contribution</div>
       <div class="revenue-row"><div class="revenue-row-label">Donor sends</div><div class="revenue-row-val highlight">$10,000</div></div>
       <div class="revenue-row"><div class="revenue-row-label">Platform commission (10%)</div><div class="revenue-row-val gold">$1,000</div></div>
       <div class="revenue-row"><div class="revenue-row-label">Scholar receives</div><div class="revenue-row-val highlight">$9,000</div></div>
       <div class="revenue-row"><div class="revenue-row-label">Processing fees (~2.5%)</div><div class="revenue-row-val">$250</div></div>
-      <div class="revenue-row"><div class="revenue-row-label">Ailes net revenue</div><div class="revenue-row-val gold">$750</div></div>
-      <div class="revenue-row"><div class="revenue-row-label">Zero capital required</div><div class="revenue-row-val highlight">✓</div></div>
+      <div class="revenue-row"><div class="revenue-row-label">Operations and support</div><div class="revenue-row-val gold">$750</div></div>
+      <div class="revenue-row"><div class="revenue-row-label">Published fee model</div><div class="revenue-row-val highlight">Yes</div></div>
     </div>
 
     <div class="revenue-facts">
@@ -975,6 +1017,81 @@ footer{
   </div>
 </section>
 
+<!-- TRUST -->
+<section class="trust-section" id="trust">
+  <div class="section-eyebrow reveal">Trust and credibility</div>
+  <h2 class="section-h2 reveal">Clear governance.<br/><em>Human support.</em></h2>
+  <div class="trust-grid">
+    <div class="trust-card reveal">
+      <ul class="trust-list">
+        <li><strong style="color:var(--ink);font-weight:600;">Operating entity:</strong> Ailes Travel Holdings Limited.</li>
+        <li><strong style="color:var(--ink);font-weight:600;">Primary contact:</strong> info@ailesglobal.com · +256 704 833 021.</li>
+        <li><strong style="color:var(--ink);font-weight:600;">Verification process:</strong> scholar applications are manually reviewed before listing.</li>
+        <li><strong style="color:var(--ink);font-weight:600;">Update cadence:</strong> platform, policy, and scholar updates are published monthly.</li>
+      </ul>
+    </div>
+    <div class="trust-card reveal">
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar">AG</div>
+          <div class="team-name">Admissions Team</div>
+          <div class="team-role">Scholar verification and screening</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">DP</div>
+          <div class="team-name">Donor Partnerships</div>
+          <div class="team-role">Donor onboarding and reporting</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">CO</div>
+          <div class="team-name">Compliance Office</div>
+          <div class="team-role">Data handling and policy oversight</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">SU</div>
+          <div class="team-name">Support Team</div>
+          <div class="team-role">End-to-end scholar and donor support</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="roadmap-section" id="roadmap">
+  <div class="section-eyebrow reveal">Execution roadmap</div>
+  <h2 class="section-h2 reveal">Focused delivery over<br/><em>the next 90 days.</em></h2>
+  <div class="roadmap-grid">
+    <div class="roadmap-card reveal">
+      <div class="roadmap-phase">Days 1–30</div>
+      <div class="roadmap-title">Foundation</div>
+      <ul class="roadmap-points">
+        <li>Finalize submission flow, validation, and anti-spam controls.</li>
+        <li>Publish legal pages and operational contact standards.</li>
+        <li>Activate analytics for CTA and waitlist conversion.</li>
+      </ul>
+    </div>
+    <div class="roadmap-card reveal">
+      <div class="roadmap-phase">Days 31–60</div>
+      <div class="roadmap-title">Public trust</div>
+      <ul class="roadmap-points">
+        <li>Release first verified scholar cohort profiles.</li>
+        <li>Publish donor reporting format and update schedule.</li>
+        <li>Launch content review workflow for monthly updates.</li>
+      </ul>
+    </div>
+    <div class="roadmap-card reveal">
+      <div class="roadmap-phase">Days 61–90</div>
+      <div class="roadmap-title">Scale readiness</div>
+      <ul class="roadmap-points">
+        <li>Expand donor and sponsor onboarding channels.</li>
+        <li>Improve mobile conversion and page performance.</li>
+        <li>Publish roadmap progress report with next milestones.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="donate">
   <div class="cta-inner">
@@ -988,13 +1105,31 @@ footer{
     </div>
 
     <div class="cta-form reveal" id="ctaForm">
+      <input class="hp-field" type="text" id="cWebsite" name="website" autocomplete="off" tabindex="-1"/>
       <input class="cta-input" type="text" placeholder="Full name" id="cName"/>
       <input class="cta-input" type="email" placeholder="Email address" id="cEmail"/>
       <input class="cta-input" type="text" placeholder="Country" id="cCountry"/>
       <input class="cta-input" type="text" id="cExtra" placeholder="University & program you're applying to"/>
+      <label class="cta-consent"><input type="checkbox" id="cConsent"/> I agree to be contacted by Ailes Scholars about my waitlist request.</label>
       <button class="cta-submit" onclick="handleJoin()">Join the Waitlist →</button>
-      <div class="cta-note">No spam. We'll contact you when the platform launches.</div>
+      <div class="cta-note">No spam. We'll only contact you about your submission and platform updates.</div>
     </div>
+  </div>
+</section>
+
+<!-- LEGAL -->
+<section class="legal-section" id="legal">
+  <div class="section-eyebrow reveal">Policies</div>
+  <h2 class="section-h2 reveal">Clear terms and<br/><em>data handling.</em></h2>
+  <div class="legal-grid">
+    <article class="legal-card reveal" id="privacy">
+      <h3>Privacy policy</h3>
+      <p>We collect only the information you submit in this form to respond to your request, manage waitlist onboarding, and provide relevant updates. We do not sell personal data. To request correction or deletion of your submitted information, contact info@ailesglobal.com.</p>
+    </article>
+    <article class="legal-card reveal" id="terms">
+      <h3>Terms of use</h3>
+      <p>Information on this page is for platform onboarding and does not constitute a funding guarantee. Ailes Scholars may update program details, eligibility criteria, and timelines. By submitting, you confirm that the information provided is accurate and lawful.</p>
+    </article>
   </div>
 </section>
 
@@ -1007,13 +1142,30 @@ footer{
     <a href="mailto:info@ailesglobal.com" style="font-size:0.72rem;color:rgba(248,245,239,0.35);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='rgba(248,245,239,0.35)'">Email: info@ailesglobal.com</a>
   </div>
   <ul class="footer-links">
-    <li><a href="#">Privacy</a></li>
-    <li><a href="#">Terms</a></li>
+    <li><a href="#privacy">Privacy</a></li>
+    <li><a href="#terms">Terms</a></li>
     <li><a href="mailto:info@ailesglobal.com">Contact</a></li>
   </ul>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  window.dataLayer=window.dataLayer||[];
+  function trackEvent(eventName,payload={}){
+    const eventPayload={event:eventName,...payload,timestamp:new Date().toISOString()};
+    window.dataLayer.push(eventPayload);
+    if(typeof window.gtag==='function'){
+      window.gtag('event',eventName,payload);
+    }
+  }
+
+  trackEvent('page_view',{page:'home'});
+
+  document.addEventListener('click',e=>{
+    const cta=e.target.closest('[data-cta]');
+    if(!cta) return;
+    trackEvent('cta_click',{cta:cta.getAttribute('data-cta')});
+  });
+
   const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove',e=>{
@@ -1049,6 +1201,7 @@ footer{
   function switchTab(btn,type){
     document.querySelectorAll('.cta-tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
+    trackEvent('waitlist_tab_switch',{type});
     const extra=document.getElementById('cExtra');
     const country=document.getElementById('cCountry');
     if(type==='scholar'){extra.placeholder='University & program you\'re applying to';}
@@ -1062,11 +1215,32 @@ footer{
     const email=document.getElementById('cEmail').value.trim();
     const country=document.getElementById('cCountry').value.trim();
     const extra=document.getElementById('cExtra').value.trim();
+    const website=document.getElementById('cWebsite').value.trim();
+    const consent=document.getElementById('cConsent').checked;
     const activeTab=document.querySelector('.cta-tab.active')?.textContent||'Scholar';
+
+    const lastSubmitAt=Number(localStorage.getItem('ailes_waitlist_last_submit')||0);
+    const now=Date.now();
+    if(now-lastSubmitAt<15000){
+      alert('Please wait a few seconds before submitting again.');
+      return;
+    }
+
+    if(website){
+      trackEvent('waitlist_blocked_honeypot',{type:activeTab});
+      return;
+    }
 
     if(!name||!email||!email.includes('@')){
       alert('Please fill in your name and a valid email address.');return;
     }
+
+    if(!consent){
+      alert('Please confirm consent so we can contact you about your submission.');
+      return;
+    }
+
+    trackEvent('waitlist_submit_attempt',{type:activeTab});
 
     const btn=document.querySelector('.cta-submit');
     btn.textContent='Submitting...';btn.disabled=true;
@@ -1091,6 +1265,9 @@ footer{
         throw new Error('Submission failed');
       }
 
+      localStorage.setItem('ailes_waitlist_last_submit',String(now));
+      trackEvent('waitlist_submit_success',{type:activeTab});
+
       document.getElementById('ctaForm').innerHTML=`
         <div style="padding:2.5rem;border:1px solid rgba(248,245,239,0.12);border-radius:4px;text-align:center;">
           <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-pale);margin-bottom:1rem;">Submission Confirmed</div>
@@ -1099,6 +1276,7 @@ footer{
         </div>`;
     }catch(err){
       btn.textContent='Join the Waitlist →';btn.disabled=false;
+      trackEvent('waitlist_submit_failed',{type:activeTab});
       const subject=encodeURIComponent(`Ailes Scholars Waitlist: ${activeTab}`);
       const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCountry: ${country}\nType: ${activeTab}\nDetails: ${extra}`);
       window.location.href=`mailto:info@ailesglobal.com?subject=${subject}&body=${body}`;
